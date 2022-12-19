@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 
 from .models import Card
+from .forms import CreateCardForm
 
 
 class IndexView(ListView):
@@ -10,13 +11,12 @@ class IndexView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cards'] = Card.objects.all()
+        context['cards'] = Card.objects.filter(status='Active')
         return context
 
 
 class GenerateCardView(CreateView):
     template_name = 'card_generator.html'
     success_url = reverse_lazy('index')
-    model = Card
-    fields = '__all__'
+    form_class = CreateCardForm
 

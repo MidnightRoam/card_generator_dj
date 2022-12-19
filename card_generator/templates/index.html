@@ -4,25 +4,24 @@
 {% block content %}
     <body class="container">
         <div class="page">
-            <div class="card flip-front shadow">
-                <p class="card__brand">Online banking</p>
-                <div class="card__series">
-                    <p class="series__title">Series</p>
-                    <p class="series__number">113</p>
+            {% for card in cards %}
+                <div class="card flip-front shadow">
+                    <p class="card__brand">Online banking</p>
+                    <div class="card__series">
+                        <p class="series__title">Series</p>
+                        <p class="series__number">{{ card.series }}</p>
+                    </div>
+                    <p class="card__number">{{ card.number }}</p>
+                    <div class="card__expiration-date">
+                        <p class="date__title">Date of expiry</p>
+                        <p class="date__value">{{ card.expiration_date }}</p>
+                    </div>
+                    <div class="card__holder">
+                        <p class="holder__title">Card holder</p>
+                        <a href="#" class="holder__name">{{ card.holder }}</a>
+                    </div>
                 </div>
-                <p class="card__number">1111111111111111</p>
-                <div class="card__expiration-date">
-                    <p class="date__title">Date of expiry</p>
-                    <p class="date__value">12.23.2023</p>
-                </div>
-                <div class="card__holder">
-                    <p class="holder__title">Card holder</p>
-                    <p class="holder__name">Uladzislau Saldatsenka</p>
-                </div>
-            </div>
-<!--            <div class="card flip-back shadow">-->
-<!--                -->
-<!--            </div>-->
+            {% endfor %}
         </div>
     </body>
 {% endblock %}

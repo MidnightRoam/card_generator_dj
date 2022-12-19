@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
-from random import randint
+
+from django.contrib.auth.models import User
 
 
 def default_expiration_date():
@@ -20,24 +21,45 @@ def year_expiration_date():
 
 class Card(models.Model):
     class ExpirationCardDate(models.TextChoices):
-        year = "1", "1 year"
-        halfyear = "2", "6 months"
-        default = "3", "30 days"
+        """Text choices class for a expiration_date field"""
+        year = "1 year", "1 year"
+        halfyear = "6 months", "6 months"
+        default = "30 days", "30 days"
 
-    STATUS_CHOICES = (
-        ('0', 'Non active'),
-        ('1', 'Active'),
-        ('2', 'Expired'),
-    )
-    # EXPIRATION_DATES = (
-    #     (year_expiration_date, '1 year'),
-    #     (halfyear_expiration_date, '6 months'),
-    #     (default_expiration_date, '30 days'),
-    # )
-    series = models.CharField(max_length=3)
-    number = models.CharField(max_length=16)
-    release_date = models.DateTimeField(default=datetime.datetime.now(), editable=False)
-    expiration_date = models.DateTimeField(default=default_expiration_date, choices=ExpirationCardDate.choices)
-    usage_date = models.DateTimeField(default=datetime.datetime.now(), editable=False)
-    status = models.CharField(max_length=10, default=STATUS_CHOICES[0][0], choices=STATUS_CHOICES)
+    class StatusCard(models.TextChoices):
+        """Text choices class for a status field"""
+        non_active = 'Non active',
+        active = 'Active',
+        expired = 'Expired'
 
+    series = models.IntegerField(unique=True,
+                                 default=10,
+                                 editable=False)
+    number = models.IntegerField(unique=True,
+                                 default=00000000000000,
+                                 editable=False)
+    release_date = models.DateTimeField(default=datetime.datetime.now(),
+                                        editable=False)
+    expiration_date = models.CharField(max_length=255,
+                                       default=default_expiration_date,
+                                       choices=ExpirationCardDate.choices)
+    usage_date = models.DateTimeField(default=datetime.datetime.now(),
+                                      editable=False)
+    status = models.CharField(max_length=10,
+                              default=StatusCard.choices[1][1],
+                              choices=StatusCard.choices)
+    holder = models.ForeignKey(User,
+                               on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        """Increment unique card series and card number at creating a new card"""
+        cards = Card.objects.all()
+
+        if cards.exists() and self._state.adding:   # self._state.adding позволяет увеличивать значение только в момент
+            # создания карты, и не делать этого при её обновлении
+            last_number = cards.latest('number')
+            self.number = int(last_number.number) + 1
+
+            last_series = cards.latest('series')
+            self.series = int(last_series.series) + 1
+        super().save(*args, **kwargs)

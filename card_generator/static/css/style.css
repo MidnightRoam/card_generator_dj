@@ -88,8 +88,8 @@ navbar {
 .card__holder {
     position: absolute;
     top: 69%;
-    right: 50%;
-    width: 205px;
+    right: 40.5%;
+    width: 255px;
 }
 
 .holder__title {
@@ -99,6 +99,15 @@ navbar {
 .holder__name {
     font-size: 1.5em;
     color: #44f5b1;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.holder__name:hover {
+    background: orange;
+    color: #fff;
+    border-radius: 1em;
+    padding: 2px 10px;
 }
 
 /* Login page styles */
