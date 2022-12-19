@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.models import User
@@ -10,10 +11,12 @@ class IndexView(ListView):
     """List of cards filtered by card status is Active"""
     model = Card
     template_name = 'index.html'
+    paginate_by = 6
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cards'] = Card.objects.filter(status='Active')
+        p = Paginator(Card.objects.filter(status='Active'), self.paginate_by)
+        context['cards'] = p.page(context['page_obj'].number)
         return context
 
 

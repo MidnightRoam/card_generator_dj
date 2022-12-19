@@ -57,6 +57,7 @@ navbar {
     height: auto;
     width: 100%;
     flex-wrap: wrap;
+    position: relative;
 }
 
 .card {
@@ -405,4 +406,31 @@ navbar {
 .search__input:focus::placeholder, .search__input:hover::placeholder {
     opacity: 1;
     color: #fff;
+}
+
+/* Question pagination styles */
+.pagination-section {
+    position: absolute;
+    margin: 10px;
+    top: 90%;
+    right: 50%;
+}
+
+.pagination__title {
+    font-size: 2em;
+    font-weight: 300;
+    margin: 10px 0px;
+}
+
+.pagination-link {
+    background-color: #7879F1;
+    color: #fff;
+    padding: 3px 11px 4px 11px;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.page-num-selected {
+    background-color: #44f5b1;
+    color: #5D5FEF;
 }
