@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 import datetime
 
 from django.contrib.auth.models import User
@@ -20,6 +21,7 @@ def year_expiration_date():
 
 
 class Card(models.Model):
+    """Card model"""
     class ExpirationCardDate(models.TextChoices):
         """Text choices class for a expiration_date field"""
         year = "1 year", "1 year"
@@ -35,9 +37,9 @@ class Card(models.Model):
     series = models.IntegerField(unique=True,
                                  default=10,
                                  editable=False)
-    number = models.IntegerField(unique=True,
-                                 default=00000000000000,
-                                 editable=False)
+    number = models.BigIntegerField(unique=True,
+                                    default=10000000000000,
+                                    editable=False)
     release_date = models.DateTimeField(default=datetime.datetime.now(),
                                         editable=False)
     expiration_date = models.CharField(max_length=255,
@@ -54,12 +56,25 @@ class Card(models.Model):
     def save(self, *args, **kwargs):
         """Increment unique card series and card number at creating a new card"""
         cards = Card.objects.all()
+        default_card_number = 1000000000000
 
         if cards.exists() and self._state.adding:   # self._state.adding позволяет увеличивать значение только в момент
             # создания карты, и не делать этого при её обновлении
             last_number = cards.latest('number')
-            self.number = int(last_number.number) + 1
+            self.number = int(last_number.number) + default_card_number + 1
 
             last_series = cards.latest('series')
             self.series = int(last_series.series) + 1
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('profile', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return str(self.number)
+
+
+class Order(models.Model):
+    """Orders model"""
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="profile__page">
+        <div class="card shadow">
+            <p class="card__brand">Online banking</p>
+            <div class="card__series">
+                <p class="series__title">Series</p>
+                <p class="series__number">{{ object.series }}</p>
+            </div>
+            <a href="{{ object.get_absolute_url }}" class="card__number">{{ object.number }}</a>
+            <div class="card__expiration-date">
+                <p class="date__title">Date of expiry</p>
+                <p class="date__value">{{ object.expiration_date }}</p>
+            </div>
+            <div class="card__holder">
+                <p class="holder__title">Card holder</p>
+                <a href="{{ object.get_absolute_url }}" class="holder__name">{{ object.holder }}</a>
+            </div>
+        </div>
+        <aside class="profile__aside">
+            <p class="aside__title">Order history:</p>
+            {% if orders %}
+                {% for order in orders %}
+                    <ul class="order__ol">
+                        <li class="order__elem">{{ order }}</li>
+                    </ul>
+                {% endfor %}
+            {% else %}
+                <p class="aside__no-orders">Consumer didn't order anything yet</p>
+            {% endif %}
+        </aside>
+    </div>
+{% endblock %}

@@ -3,25 +3,33 @@
 
 {% block content %}
     <body class="container">
+        <p class="page__title">All registered active cards</p>
+        {% if cards %}
         <div class="page">
             {% for card in cards %}
-                <div class="card flip-front shadow">
+                <div class="card shadow">
                     <p class="card__brand">Online banking</p>
                     <div class="card__series">
                         <p class="series__title">Series</p>
                         <p class="series__number">{{ card.series }}</p>
                     </div>
-                    <p class="card__number">{{ card.number }}</p>
+                    <a href="{{ card.get_absolute_url }}" class="card__number">{{ card.number }}</a>
                     <div class="card__expiration-date">
                         <p class="date__title">Date of expiry</p>
                         <p class="date__value">{{ card.expiration_date }}</p>
                     </div>
                     <div class="card__holder">
                         <p class="holder__title">Card holder</p>
-                        <a href="#" class="holder__name">{{ card.holder }}</a>
+                        <a href="{{ card.get_absolute_url }}" class="holder__name">{{ card.holder }}</a>
                     </div>
                 </div>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="no-cards">
+            <p class="title__empty">There is no active cards</p>
+            <a href="{% url 'generator' %}" class="btn">Register new</a>
+        </div>
+        {% endif %}
     </body>
 {% endblock %}

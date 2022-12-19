@@ -4,7 +4,8 @@
 {% block content %}
     <body class="container">
         <div class="card-generator__page">
-            <form action="" class="form__control">
+            <form action="" method="post" class="form__control">
+                {% csrf_token %}
                 {{ form.as_p }}
                 <button class="btn">Generate</button>
             </form>

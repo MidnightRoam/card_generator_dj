@@ -22,12 +22,39 @@ navbar {
     justify-content: space-evenly;
 }
 
-.page {
+.page__title {
+    font-size: 3em;
+    margin: 20px 0px;
+    background-color: #8D72E1;
+    padding: 5px 15px;
+    color: #fff;
+    border-radius: 0.3em;
+}
+
+.no-cards {
+    background-image: url('/static/images/background.svg');
+    background-size: cover;
+    width: 80%;
+    height: 500px;
+    border-radius: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 892px;
+}
+
+.title__empty {
+    font-size: 3em;
+    margin: 20px 0px;
+    color: #fff;
+
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
     width: 100%;
     flex-wrap: wrap;
 }
@@ -38,6 +65,7 @@ navbar {
     background-color: #8D72E1;
     border-radius: 1em;
     position: relative;
+    margin: 1em;
 }
 
 .card__brand {
@@ -71,6 +99,16 @@ navbar {
     top: 40%;
     left: 11.5%;
     color: #44f5b1;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.card__number:hover {
+    background: orange;
+    color: #fff;
+    border-radius: 1em;
+    left: 9.5%;
+    padding: 0px 10px;
 }
 
 .card__expiration-date {
@@ -107,7 +145,7 @@ navbar {
     background: orange;
     color: #fff;
     border-radius: 1em;
-    padding: 2px 10px;
+    padding: 1px 10px;
 }
 
 /* Login page styles */
@@ -219,6 +257,48 @@ navbar {
     border-left: 2px solid #8D72E1;
 }
 
+/* Card profile page styles */
+.profile__page {
+    padding: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile__aside {
+    background: #8D72E1;
+    border-radius: 1em;
+    height: 550px;
+    width: 350px;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.aside__title {
+    padding: 10px;
+    font-size: 2em;
+    color: #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.aside__no-orders {
+    font-size: 1.5em;
+    color: #fff;
+    margin: 0 auto;
+}
+
+.order__ol {
+    padding: 10px 0px 0px 40px;
+}
+
+.order__elem {
+    font-size: 1.3em;
+    color: #fff;
+}
+
 /* UI components style */
 .btn {
     border: none;
@@ -230,6 +310,7 @@ navbar {
     width: 300px;
     font-size: 1.3em;
     transition: 0.5s;
+    text-decoration: none;
 }
 
 .btn:hover {
@@ -256,4 +337,23 @@ navbar {
     -webkit-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+}
+
+/* Scroll bar styles */
+
+::-webkit-scrollbar-track
+{
+	border: 5px solid white;
+	background-color: #8D72E1;
+}
+
+::-webkit-scrollbar
+{
+	width: 15px;
+	background-color: #dfe6e9;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: orange;
 }
