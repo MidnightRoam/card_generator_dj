@@ -8,3 +8,8 @@ class CreateCardForm(ModelForm):
     class Meta:
         model = Card
         fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super(CreateCardForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form__control'

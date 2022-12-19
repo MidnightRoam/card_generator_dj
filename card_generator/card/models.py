@@ -7,26 +7,32 @@ from django.contrib.auth.models import User
 
 def default_expiration_date():
     """Set a default expiration date equals 30 days"""
-    return datetime.datetime.now() + datetime.timedelta(days=30)
+    date = datetime.datetime.now() + datetime.timedelta(days=30)
+    format_date = date.strftime("%Y-%m-%d %H:%M:%S")
+    return format_date
 
 
 def halfyear_expiration_date():
     """Set a expiration date equals 182 days (half a year)"""
-    return datetime.datetime.now() + datetime.timedelta(days=182)
+    date = datetime.datetime.now() + datetime.timedelta(days=182)
+    format_date = date.strftime("%Y-%m-%d %H:%M:%S")
+    return format_date
 
 
 def year_expiration_date():
     """Set a expiration date equals a year"""
-    return datetime.datetime.now() + datetime.timedelta(days=365)
+    date = datetime.datetime.now() + datetime.timedelta(days=365)
+    format_date = date.strftime("%Y-%m-%d %H:%M:%S")
+    return format_date
 
 
 class Card(models.Model):
     """Card model"""
     class ExpirationCardDate(models.TextChoices):
         """Text choices class for a expiration_date field"""
-        year = "1 year", "1 year"
-        halfyear = "6 months", "6 months"
-        default = "30 days", "30 days"
+        year = year_expiration_date(), f"{year_expiration_date()} (1 year)"
+        halfyear = halfyear_expiration_date(), f"{halfyear_expiration_date()} (6 months)"
+        default = default_expiration_date(), f"{default_expiration_date()} (30 days)"
 
     class StatusCard(models.TextChoices):
         """Text choices class for a status field"""

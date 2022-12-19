@@ -115,9 +115,9 @@ navbar {
 .card__expiration-date {
     color: #44f5b1;
     position: absolute;
-    top: 72%;
-    left: 70%;
-    width: 100px;
+    top: 68.5%;
+    left: 69%;
+    width: 130px;
 }
 
 .date__title {
@@ -235,22 +235,22 @@ navbar {
 }
 
 /* Forms styles */
-.form__control p {
-    width: 200px;
-    margin-bottom: 15px;
+.from__control {
+    background: orange;
+    width: 450px;
 }
 
-.form__control p label {
+.form__control, .form__control .btn {
+    width: 350px;
+    margin-bottom: 15px;
+    border-radius: 0.5em;
+    padding: 5px;
     font-size: 1.2em;
     font-weight: 400;
 }
 
-.form__control p input {
-    width: 280px;
-    border: none;
+.form__control select {
     border: 1px solid #8D72E1;
-    border-radius: 0.5em;
-    padding: 5px;
 }
 
 .form__control p input:focus{

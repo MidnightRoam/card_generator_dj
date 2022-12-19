@@ -11,7 +11,7 @@ class LoginView(View):
     def get(self, request):
         if request.user.is_authenticated:
             return redirect('index')
-        return render(request, 'login.html')
+        return render(request, 'users/login.html')
 
     def post(self, request):
         username = request.POST.get('username')
@@ -27,7 +27,7 @@ class LoginView(View):
 class SignupView(View):
     """User registration functionality using built-in Django tools"""
     def get(self, request):
-        return render(request, 'registration.html')
+        return render(request, 'users/registration.html')
 
     def post(self, request):
         username = request.POST.get('username')

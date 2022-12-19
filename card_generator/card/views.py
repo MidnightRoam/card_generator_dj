@@ -10,7 +10,7 @@ from .forms import CreateCardForm
 class IndexView(ListView):
     """List of cards filtered by card status is Active"""
     model = Card
-    template_name = 'index.html'
+    template_name = 'pages/index.html'
     paginate_by = 6
 
     def get_context_data(self, *args, **kwargs):
@@ -22,7 +22,7 @@ class IndexView(ListView):
 
 class GenerateCardView(CreateView):
     """Create view for a generation card form without a admin panel"""
-    template_name = 'card_generator.html'
+    template_name = 'pages/card_generator.html'
     success_url = reverse_lazy('index')
     form_class = CreateCardForm
 
@@ -30,7 +30,7 @@ class GenerateCardView(CreateView):
 class CardDetailView(DetailView):
     """Card detail page"""
     model = Card
-    template_name = 'card_detail_view.html'
+    template_name = 'pages/card_detail_view.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

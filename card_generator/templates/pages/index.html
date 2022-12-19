@@ -28,13 +28,13 @@
                 </div>
             {% endfor %}
         </div>
+        {% include 'include/pagination.html' %}
         {% else %}
         <div class="no-cards">
             <p class="title__empty">There is no active cards</p>
             <a href="{% url 'generator' %}" class="btn">Register new</a>
         </div>
         {% endif %}
-    {% include 'include/pagination.html' %}
     </body>
 {% endblock %}
 
