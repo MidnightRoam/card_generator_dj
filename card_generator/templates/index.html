@@ -5,6 +5,9 @@
     <body class="container">
         <p class="page__title">All registered active cards</p>
         {% if cards %}
+        <div class="search">
+            <input type="search" id="search-field" class="search__input" placeholder="Enter a card data">
+        </div>
         <div class="page">
             {% for card in cards %}
                 <div class="card shadow">
@@ -32,4 +35,8 @@
         </div>
         {% endif %}
     </body>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/searchBar.js' %}" type="text/javascript"></script>
 {% endblock %}

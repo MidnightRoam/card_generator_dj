@@ -339,6 +339,10 @@ navbar {
     box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
 }
 
+.hide {
+    display: none;
+}
+
 /* Scroll bar styles */
 
 ::-webkit-scrollbar-track
@@ -356,4 +360,49 @@ navbar {
 ::-webkit-scrollbar-thumb
 {
 	background-color: orange;
+}
+
+/* Search bar styles */
+.search {
+    position: absolute;
+    left: 63%;
+    top: 11%;
+}
+
+.search__input {
+    width: 40px;
+    height: 40px;
+    border-radius: 5em;
+    border: none;
+    transition: 0.5s;
+    background-image: url('https://icons.iconarchive.com/icons/icons8/windows-8/256/Very-Basic-Search-icon.png');
+    object-fit: cover;
+    background-position: center;
+    background-size: 25px;
+    opacity: 0.6;
+    background-repeat: no-repeat;
+    background-color: #8D72E1;
+    color: #fff;
+}
+
+.search__input:focus, .search__input:hover {
+    border-radius: 1.5em;
+    width: 400px;
+    outline: none;
+    opacity: 1;
+    padding: 10px 70px 10px 30px;
+    background-position-x: 90%;
+}
+
+.search__input:hover {
+    opacity: 1;
+}
+
+.search__input::placeholder {
+    opacity: 0;
+}
+
+.search__input:focus::placeholder, .search__input:hover::placeholder {
+    opacity: 1;
+    color: #fff;
 }
