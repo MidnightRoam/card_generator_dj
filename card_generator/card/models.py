@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 import datetime
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 from django.contrib.auth.models import User
 
@@ -58,7 +59,12 @@ class Card(models.Model):
                               choices=StatusCard.choices)
     holder = models.ForeignKey(User,
                                on_delete=models.CASCADE)
-    num_instances = models.IntegerField('Number of cards', default=1)
+    num_instances = models.IntegerField('Number of cards',
+                                        default=1,
+                                        validators=[
+                                            MaxValueValidator(20),
+                                            MinValueValidator(1)
+                                        ])
 
     def save(self, *args, **kwargs):
         """Increment unique card series and card number at creating a new card"""
@@ -73,17 +79,6 @@ class Card(models.Model):
             last_series = cards.latest('series')
             self.series = int(last_series.series) + 1
         super().save(*args, **kwargs)
-
-        # # Create the additional instances using a loop
-        # for i in range(num_instances):
-        #     instance = Card(**kwargs)
-        #     instance.save()
-
-    # @classmethod
-    # def create_multiple_instances(num_instances, **valid_data):
-    #     for i in range(num_instances):
-    #         instance = Card(**valid_data)
-    #         instance.save()
 
     def get_absolute_url(self):
         return reverse('profile', kwargs={'pk': self.pk})

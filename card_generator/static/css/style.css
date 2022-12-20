@@ -243,7 +243,7 @@ navbar {
 .form__control, .form__control .btn {
     width: 350px;
     margin-bottom: 15px;
-    border-radius: 0.5em;
+    border-radius: 0.3em;
     padding: 5px;
     font-size: 1.2em;
     font-weight: 400;
@@ -251,11 +251,16 @@ navbar {
 
 .form__control select {
     border: 1px solid #8D72E1;
+
 }
 
 .form__control p input:focus{
     outline: none;
     border-left: 2px solid #8D72E1;
+}
+
+.form__control p input[type='number'] {
+    width; 50px;
 }
 
 /* Card profile page styles */
