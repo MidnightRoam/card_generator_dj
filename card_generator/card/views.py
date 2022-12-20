@@ -23,8 +23,10 @@ class IndexView(ListView):
 class GenerateCardView(CreateView):
     """Create view for a generation card form without a admin panel"""
     template_name = 'pages/card_generator.html'
-    success_url = reverse_lazy('index')
     form_class = CreateCardForm
+
+    def get_success_url(self):
+        return reverse_lazy('index')
 
 
 class CardDetailView(DetailView):

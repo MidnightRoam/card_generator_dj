@@ -9,6 +9,10 @@ class CardAdmin(admin.ModelAdmin):
     search_fields = ('series', 'number', 'release_date', 'expiration_date', 'status')
     list_editable = ['status']
 
+    # def save_model(self, request, obj, form, change):
+    #     obj.save()
+    #     Card.create_multiple_instances(obj.num_instances)
+
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
