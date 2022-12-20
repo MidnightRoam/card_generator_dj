@@ -81,10 +81,22 @@ class Card(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Returns personal url for a card profile"""
         return reverse('profile', kwargs={'pk': self.pk})
 
     def __str__(self):
         return str(self.number)
+
+    def check_expiration(self):
+        """Check for expired cards function"""
+        # Convert the expiration date string to a datetime object
+        expiration_date = datetime.datetime.strptime(self.expiration_date, '%Y-%m-%d %H:%M:%S')
+
+        # Check if the expiration date has passed
+        if datetime.datetime.now() > expiration_date:
+            # Update the status field to "Expired"
+            self.status = self.StatusCard.choices[2][2]
+            self.save()
 
 
 class Order(models.Model):

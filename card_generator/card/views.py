@@ -13,6 +13,11 @@ class IndexView(ListView):
     template_name = 'pages/index.html'
     paginate_by = 6
 
+    # Check for expired cards
+    cards = Card.objects.filter(status='Active')
+    for card in cards:
+        card.check_expiration()
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         p = Paginator(Card.objects.filter(status='Active'), self.paginate_by)
